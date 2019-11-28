@@ -1,14 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 
-import React ,{useEffect, useContext} from 'react';
+import React ,{useEffect, useState} from 'react';
 import {Col , Container, Row ,Card ,CardText, CardTitle} from "reactstrap"
 import { WiHumidity  } from 'weather-icons-react';
 import Swiper from 'swiper'
-import WeatherContext from '../context/weatherContext/Context'
 import Moment from 'react-moment';
 import 'moment/locale/fr';
 import { css } from '@emotion/core';
+import SweetAlert from 'sweetalert2-react';
+import axios from 'axios'
 // First way to import
 import { RingLoader } from 'react-spinners';
 import { ForecastItem } from './ForecastItem';
@@ -20,19 +21,59 @@ const override = css`
 
 
 export const WeatherCard = () => {
+  const [currentWeather,setCurrentWeather] =  useState(null)
+  const [loading,setLoading] = useState(true)
+  const [forecast,setForecast] = useState(null)
+  const [error,setError] = useState(null)
+  const [alert,setAlert] = useState(false)
+   //Lomé id
+   const cityId = "2365267"
 
-  const weatherContext = useContext(WeatherContext)
-  const {loading, getCurrentWeather,currentWeather ,fetchData , forecast} = weatherContext
+   //get current weather 
+  const getCurrentWeather = async () => {
+    try {
+
+      const res = await axios.get(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&lang=fr&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`)
+
+      setCurrentWeather(res.data)
+
+    } catch (e) {
+      setError(e.response)
+    }
+       
+  }
+
+
+   //get forecast (5 days)
+   const getForecast = async () => {
+    try {
+
+      const res = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&lang=fr&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`)
+
+      setForecast(res.data.list)
+
+    } catch (e) {
+      setError(e.response)
+    }
+       
+  }
  
   useEffect(()=> {
 
-    new Swiper('.swiper-container')
+    //Init forecast swiper 
+    new Swiper('.swiper-container', {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    })
+
+    //fetch data
     if(currentWeather==null && forecast == null) {
       getCurrentWeather() 
-      fetchData()
+      getForecast()
+      setLoading(false)
     }
-   
-    
   })
   if(currentWeather!==null) {
 
@@ -41,6 +82,9 @@ export const WeatherCard = () => {
   }
   if (forecast!==null) {
     console.log(forecast)
+  }
+  if (error) {
+    throw error
   }
 
 
@@ -61,18 +105,19 @@ export const WeatherCard = () => {
                             <CardText className=" h3">
                               <Moment format="DD/MM/YYYY">{new Date()}</Moment>
                             </CardText>
-                            <CardText className="lead ">Vent {currentWeather.wind.speed * 3600 / 1000} km/h</CardText>
+                            <CardText className="lead ">Vent {(currentWeather.wind.speed * 3.6).toFixed(2)} km/h</CardText>
                             <WiHumidity size={80} className="float-left" />
                             <CardText className="display-4">{currentWeather.main.humidity} %</CardText>
                             </Col>
                             <Col md="6" >
                             <div className="float-right">
                             <i className="fas fa-arrow-down"></i><span className="text"> {currentWeather.main.temp_min}° </span><i className="fas fa-arrow-up"></i><span className="text"> {currentWeather.main.temp_max}° </span>
-                            <i className="fas fa-info-circle info-btn button-info"></i>
+                            <i className="fas fa-info-circle info-btn button-info" onClick= { ()=> setAlert(true)}></i>
+                            <SweetAlert show={alert} title="A propos" text="Service météo de Lomé v 0.1.0" onConfirm={ ()=> setAlert(false)}  />
 
                             </div>
                             <img  src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`} alt="weather icon"/>
-                                <CardTitle className="display-3"> {currentWeather.main.temp}°C</CardTitle>
+                                <CardTitle className="display-3 button-info"> {currentWeather.main.temp}°C</CardTitle>
                                 <CardTitle className="display-4 "> {currentWeather.weather[0].description}</CardTitle>
                             </Col>
                             <Col md="6" >
@@ -94,19 +139,9 @@ export const WeatherCard = () => {
                                     />
                                   )
                                 }
-                                    <div className="swiper-slide">
-                                      <Row className=" justify-content-center">
-                                        <Col md="12" >
-                                            <CardTitle >Mardi</CardTitle>
-                                            <CardText >17/10/2019</CardText>
-                                            <WiHumidity size={80} className="d-inline" />
-                                            <CardText className="d-inline">30 %</CardText>
-                                        </Col>
-                                      </Row>
-                                    </div>
-                                    
                                 </div>
-                                <div className="swiper-pagination swiper-pagination-white "></div>
+                                <div className="swiper-button-next swiper-button-white"></div>
+                                <div className="swiper-button-prev swiper-button-white"></div>  
                             </div>
                         </Col>
                       </Row>

@@ -14,6 +14,7 @@
     "react-scripts": "3.2.0",
     "react-spinners": "^0.6.1",
     "reactstrap": "^8.1.1",
+    "sweetalert2-react": "^0.8.3",
     "swiper": "^5.2.1",
     "weather-icons-react": "^1.2.0"
   },
@@ -27,7 +28,12 @@
     "extends": "react-app"
   },
   "keywords": [
-    "weather","react-weather-app","bryanskovich","bryan ADJEI" , "openweathermap" ,"react forecast weather app" 
+    "weather",
+    "react-weather-app",
+    "bryanskovich",
+    "bryan ADJEI",
+    "openweathermap",
+    "react forecast weather app"
   ],
   "browserslist": {
     "production": [
