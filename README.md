@@ -1,5 +1,5 @@
-This project is a weather service for Lomé (TOGO) : (https://lome-weather-app.herokuapp.com/).
-##App screenshoot
+This project is a weather service for Lomé (TOGO) : (https://lome-weather-app.herokuapp.com/)
+## App screenshoot
 https://drive.google.com/file/d/1QaTatwzZg-ul5dFtzEZPNfT1SpFhoADH/view
 
 ## Available Scripts
