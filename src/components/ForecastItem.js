@@ -16,7 +16,7 @@ export const ForecastItem = ({data}) => {
                     <CardText >
                     <Moment local="fr" format="DD/MM/YYYY HH:mm">{data.dt_txt}</Moment>
                     </CardText>
-                    <img  src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} alt="weather icon"/> {data.main.temp} °C
+                    <img  src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} alt="weather icon"/> {data.main.temp} °C
                     <WiHumidity size={80} className="d-inline" />
                     <CardText className="d-inline">{data.main.humidity} %</CardText>
                 </Col>

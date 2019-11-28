@@ -75,17 +75,7 @@ export const WeatherCard = () => {
       setLoading(false)
     }
   })
-  if(currentWeather!==null) {
 
-    console.log(currentWeather)
-    
-  }
-  if (forecast!==null) {
-    console.log(forecast)
-  }
-  if (error) {
-    throw error
-  }
 
 
 
@@ -95,28 +85,30 @@ export const WeatherCard = () => {
                 <Col md="6" >
                     <Card style={{background : 'linear-gradient(to bottom, #297af9, #333fb7)', borderRadius: '10px', padding: '10px'}}>
                     {
-                      currentWeather !==null && !loading ? (
+                      currentWeather !==null && !loading && !error ? (
                         <Row className=" justify-content-center">
-                            <Col md="6" >
-                            <CardTitle className="display-3">Lomé</CardTitle>
-                            <CardTitle className="display-4">
-                              <Moment local="fr" format="dddd">{new Date()}</Moment>
-                            </CardTitle>
-                            <CardText className=" h3">
-                              <Moment format="DD/MM/YYYY">{new Date()}</Moment>
-                            </CardText>
-                            <CardText className="lead ">Vent {(currentWeather.wind.speed * 3.6).toFixed(2)} km/h</CardText>
-                            <WiHumidity size={80} className="float-left" />
-                            <CardText className="display-4">{currentWeather.main.humidity} %</CardText>
-                            </Col>
-                            <Col md="6" >
-                            <div className="float-right">
-                            <i className="fas fa-arrow-down"></i><span className="text"> {currentWeather.main.temp_min}° </span><i className="fas fa-arrow-up"></i><span className="text"> {currentWeather.main.temp_max}° </span>
-                            <i className="fas fa-info-circle info-btn button-info" onClick= { ()=> setAlert(true)}></i>
-                            <SweetAlert show={alert} title="A propos" text="Service météo de Lomé v 0.1.0" onConfirm={ ()=> setAlert(false)}  />
 
-                            </div>
-                            <img  src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`} alt="weather icon"/>
+                            <Col md="6" >
+                                <CardTitle className="display-3">Lomé</CardTitle>
+                                <CardTitle className="display-4">
+                                  <Moment local="fr" format="dddd">{new Date()}</Moment>
+                                </CardTitle>
+                                <CardText className=" h3">
+                                  <Moment format="DD/MM/YYYY">{new Date()}</Moment>
+                                </CardText>
+                                <CardText className="lead ">Vent {(currentWeather.wind.speed * 3.6).toFixed(2)} km/h</CardText>
+                                <WiHumidity size={80} className="float-left" />
+                                <CardText className="display-4">{currentWeather.main.humidity} %</CardText>
+                            </Col>
+
+                            <Col md="6" >
+                              <div className="float-right">
+                              <i className="fas fa-arrow-down"></i><span className="text"> {currentWeather.main.temp_min}° </span><i className="fas fa-arrow-up"></i><span className="text"> {currentWeather.main.temp_max}° </span>
+                              <i className="fas fa-info-circle info-btn button-info" onClick= { ()=> setAlert(true)}></i>
+                              <SweetAlert show={alert} title="A propos" text="Service météo de Lomé v 0.1.0" onConfirm={ ()=> setAlert(false)}  />
+
+                              </div>
+                              <img  src={`https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`} alt="weather icon"/>
                                 <CardTitle className="display-3 button-info"> {currentWeather.main.temp}°C</CardTitle>
                                 <CardTitle className="display-4 "> {currentWeather.weather[0].description}</CardTitle>
                             </Col>
