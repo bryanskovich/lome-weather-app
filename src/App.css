@@ -1,22 +1,76 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background:linear-gradient(to bottom, #297af9, #333fb7);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100vh;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+body {
+  background: rgb(42, 50, 158);
+  color: #fff;
+  font-family: monospace;
+  font-size: 16px;
+  height: 100vh;
+  margin: 0;
+
+  padding: 0;
+  width: 100%;
 }
 
-.App-link {
-  color: #09d3ac;
+
+@media screen and (min-width: 420px) {
+  #root {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+  }
+
+  .App {
+    border-radius: 10px;
+    box-shadow: 0 3px 20px 0 rgba(0, 0, 0, .06);
+    height: 600px;
+    width: 720px;
+
+
+  }
 }
+
+.swiper-container{
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 0 3px 20px 0 rgba(0, 0, 0, .06);
+}
+.swiper-wrapper {
+  align-items: flex-start;
+  display: flex;
+}
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: linear-gradient(to bottom, #297af9, #333fb7);
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.button-info {
+ 
+  cursor: pointer;
+
+}
+
+
