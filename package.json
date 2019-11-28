@@ -26,6 +26,9 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "keywords": [
+    "weather","react-weather-app","bryanskovich","bryan ADJEI" , "openweathermap" ,"react forecast weather app" 
+  ],
   "browserslist": {
     "production": [
       ">0.2%",
