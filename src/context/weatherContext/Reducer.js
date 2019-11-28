@@ -1,14 +1,20 @@
 import {
     FETCH_DATA,
-    DATA_ERROR
+    DATA_ERROR,
+    GET_CURRENT_WEATHER
 } from '../Types'
 export default (state,action) => {
   switch (action.type) {
     case FETCH_DATA:
         return {
             ...state,
-            currentWeather : [action.payload,...state.contacts],
-            forecast :  [action.payload,...state.contacts],
+            forecast :  action.payload.list,
+            loading:false
+        }
+      case GET_CURRENT_WEATHER:
+        return {
+            ...state,
+            currentWeather : action.payload,
             loading:false
         }
 
