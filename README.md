@@ -2,6 +2,9 @@ This project is a weather service for Lomé (TOGO) : (https://lome-weather-app.h
 ## App screenshoot
 https://drive.google.com/file/d/1QaTatwzZg-ul5dFtzEZPNfT1SpFhoADH/view
 
+## api
+Openweathermap api : (https://openweathermap.org/api)
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -9,7 +12,10 @@ In the project directory, you can run:
 
 Install app dependencies.<br />
 
-### `npm start`
+### `set .env file for openweathermap api key`
+REACT_APP_WEATHER_API_KEY={API_KEY}
+
+### `npm run dev`
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
@@ -21,7 +27,7 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm build`
+### `npm run build`
 
 Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
